@@ -1,5 +1,5 @@
 <script setup>
-import {User, Lock} from '@element-plus/icons-vue'
+import {User, Lock ,Key,Loading} from '@element-plus/icons-vue'
 import {reactive} from "vue";
 import {ElMessage} from "element-plus";
 import {post} from "@/net";
@@ -10,6 +10,8 @@ const form = reactive({
     password: '',
     remember: false
 })
+
+
 
 const login = () =>{
     if(!form.username || !form.password){
@@ -28,51 +30,86 @@ const login = () =>{
 </script>
 
 <template>
-  <div style="width: 300px;background-color: white">
-      <div style="text-align: center;margin: 0 20px">
-          <div style="margin-top: 50px">
+    <div class="content">
+        <el-form >
+            <el-form-item prop="username">
+                <el-input
+                        v-model="form.username"
+                        placeholder="用户名"
+                        type="text"
+                        tabindex="1"
+                        :prefix-icon="User"
+                        size="large"
+                />
+            </el-form-item>
+            <el-form-item prop="password">
+                <el-input
+                        v-model="form.password"
+                        placeholder="密码"
+                        type="password"
+                        tabindex="2"
+                        :prefix-icon="Lock"
+                        size="large"
+                        show-password
+                />
+            </el-form-item>
+            <el-form-item prop="code">
+                <el-input
+                        placeholder="验证码"
+                        type="text"
+                        tabindex="3"
+                        :prefix-icon="Key"
+                        maxlength="7"
+                        size="large"
+                >
+                    <template #append>
+                        <el-image>
+                            <template #placeholder>
 
-              <div style="font-size: 25px">
-                  <el-image src="/undraw_my_files_swob.png"/>
-                  登录
-              </div>
-          </div>
-          <div style="margin-top: 50px">
-              <el-input v-model="form.username" type="text" placeholder="用户名/邮箱">
-                  <template #prefix>
-                      <el-icon><User /></el-icon>
-                  </template>
-              </el-input>
-              <el-input v-model="form.password" type="text" style="margin-top: 20px" placeholder="密码">
-                  <template #prefix>
-                      <el-icon><Lock /></el-icon>
-                  </template>
-              </el-input>
-          </div>
-          <el-row style="margin-top: 5px;">
-              <el-col :span="12" style="text-align: left">
-                  <el-checkbox  v-model="form.remember" label="记住我"/>
-              </el-col>
-              <el-col :span="12" style="text-align: right">
-                  <el-link>忘记密码</el-link>
-              </el-col>
-          </el-row>
-          <div style="margin-top: 40px">
-              <el-button @click="login" style="width: 270px" type="success" plain>立即登录</el-button>
-          </div>
-          <el-divider>
-              <span style="color: grey;font-size: 13px">没有账号</span>
-          </el-divider>
-          <div>
-              <el-button style="width: 270px" type="warning" plain>注册账号</el-button>
-          </div>
-      </div>
-
-
-
-  </div>
+                            </template>
+                            <template #error>
+                                <el-icon><Loading /></el-icon>
+                            </template>
+                        </el-image>
+                    </template>
+                </el-input>
+            </el-form-item>
+            <el-row style="margin-top: 5px;">
+                <el-col :span="12" style="text-align: left">
+                    <el-checkbox  v-model="form.remember" label="记住我"/>
+                </el-col>
+                <el-col :span="12" style="text-align: right">
+                    <el-link>忘记密码</el-link>
+                </el-col>
+            </el-row>
+            <el-button type="primary" size="large" @click="login"> 立即登录 </el-button>
+            <el-divider>
+                <span style="color: grey;font-size: 13px">没有账号</span>
+            </el-divider>
+            <el-button type="warning" size="large" @click="router.push('/register')"> 注册账号 </el-button>
+        </el-form>
+    </div>
 </template>
 
-<style>
+<style  lang="scss" scoped>
 
+.content {
+    padding: 20px 50px 50px 50px;
+    :deep(.el-input-group__append) {
+        padding: 0;
+        overflow: hidden;
+        .el-image {
+            width: 100px;
+            height: 40px;
+            border-left: 0px;
+            user-select: none;
+            cursor: pointer;
+            text-align: center;
+        }
+    }
+    .el-button {
+        width: 100%;
+        margin-top: 10px;
+    }
+}
 </style>

@@ -1,26 +1,42 @@
 <script setup>
 
+import {Key, Lock, User} from "@element-plus/icons-vue";
 </script>
 
 <template>
-  <div style="width: 100vw;height: 100vh;overflow: hidden;display: flex">
-      <div style="flex: 1">
-          <el-image style="width: 100%;height: 100%" fit="cover"
-                src="https://www.toopic.cn/public/uploads/small/1642749399720164274939972.jpg"></el-image>
-      </div>
-      <div class="welcome-title">
-          <div style="font-size: 30px;font-weight: bold">云盘</div>
-      </div>
-      <router-view />
-  </div>
+    <div class="login-container">
+        <div class="login-card">
+            <div class="title">
+                <img src="@/assets/logo.png" />
+            </div>
+            <router-view />
+        </div>
+    </div>
 </template>
+<style  lang="scss" scoped>
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: 100%;
+    height: 100vh;
+    .login-card {
+        width: 480px;
+        border-radius: 20px;
+        box-shadow: 0 0 10px #dcdfe6;
+        background-color: #fff;
+        overflow: hidden;
+        .title {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 150px;
+            img {
+                height: 100%;
+            }
+        }
 
-<style scoped>
-.welcome-title {
-    position: absolute;
-    top: 30px;
-    left: 30px;
-    color: white;
-    text-shadow: 0 0 10px black;
+    }
 }
 </style>
