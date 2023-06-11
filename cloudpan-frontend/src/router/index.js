@@ -17,6 +17,11 @@ const router = createRouter({
           path: 'register',
           name: 'welcome-register',
           component: () => import('@/components/welcome/Register.vue')
+        },
+        {
+          path: 'forgotPassword',
+          name: 'welcome-recover',
+          component: () => import('@/components/welcome/ForgotPassword.vue')
         }
       ]
     },
