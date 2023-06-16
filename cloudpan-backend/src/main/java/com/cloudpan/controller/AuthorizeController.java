@@ -1,15 +1,11 @@
 package com.cloudpan.controller;
 
+import com.cloudpan.entity.Account;
 import com.cloudpan.entity.Result;
 import com.cloudpan.service.AuthorizeService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpSession;
-import javax.swing.event.HyperlinkEvent;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -17,6 +13,10 @@ public class AuthorizeController {
 
     @Resource
     AuthorizeService authorizeService;
+    @GetMapping("/getData")
+    public Result getData(){
+        return Result.success(new Account(1,"163.com","lz805","123456"));
+    }
     @PostMapping("/validateEmail")
     public Result validateEmail(@RequestParam("email")String email){
         String key=authorizeService.sendValidateEmail(email);

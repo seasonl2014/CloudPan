@@ -1,16 +1,17 @@
 <script setup>
-import {User, Lock ,Key,Loading} from '@element-plus/icons-vue'
+import {User, Lock} from '@element-plus/icons-vue'
 import {reactive} from "vue";
 import {ElMessage} from "element-plus";
-import {post} from "@/net";
+import {get, post} from "@/net";
 import router from "@/router";
+import {useStore} from "@/stores/counter";
 
 const form = reactive({
     username: '',
     password: '',
     remember: false
 })
-
+const store = useStore()
 
 
 const login = () =>{
@@ -23,7 +24,7 @@ const login = () =>{
             remember: form.remember
         },(message) => {
             ElMessage.success(message)
-            router.push("/index")
+            router.push('/index')
         })
     }
 }
@@ -52,27 +53,6 @@ const login = () =>{
                         size="large"
                         show-password
                 />
-            </el-form-item>
-            <el-form-item prop="code">
-                <el-input
-                        placeholder="验证码"
-                        type="text"
-                        tabindex="3"
-                        :prefix-icon="Key"
-                        maxlength="7"
-                        size="large"
-                >
-                    <template #append>
-                        <el-image>
-                            <template #placeholder>
-
-                            </template>
-                            <template #error>
-                                <el-icon><Loading /></el-icon>
-                            </template>
-                        </el-image>
-                    </template>
-                </el-input>
             </el-form-item>
             <el-row style="margin-top: 5px;">
                 <el-col :span="12" style="text-align: left">

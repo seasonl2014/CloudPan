@@ -10,7 +10,7 @@ function post(url,data,success,failure = defaultFailure,error = defaultError){
         withCredentials: true
     }).then(({data}) => {
         if(data.code)
-            success(data.message, data.code)
+            success(data.message, data.data, data.code)
         else
             failure(data.message, data.code)
     }).catch(error =>{
@@ -22,7 +22,7 @@ function get(url,success,failure = defaultFailure,error = defaultError){
         withCredentials: true
     }).then(({data}) => {
         if(data.code)
-            success(data.message, data.code)
+            success(data.message,data.data,data.code)
         else
             failure(data.message, data.code)
     }).catch(error)

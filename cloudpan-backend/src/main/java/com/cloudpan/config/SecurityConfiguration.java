@@ -31,10 +31,8 @@ public class SecurityConfiguration {
 
     @Resource
     AuthorizeService authorizeService;
-
 //    @Resource
 //    DataSource dataSource;
-
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         return http
@@ -62,7 +60,7 @@ public class SecurityConfiguration {
                 .configurationSource(this.configurationSource())
                 .and()
                 .exceptionHandling()
-                .authenticationEntryPoint(this::onAuthenticationFailure)
+                .authenticationEntryPoint(this::onAuthenticationException)
                 .and()
                 .build();
 
@@ -110,6 +108,10 @@ public class SecurityConfiguration {
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
         response.setCharacterEncoding("utf-8");
         response.getWriter().write(JSONObject.toJSONString(Result.error("登录失败!")));
+    }
+    public void onAuthenticationException(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
+        response.setCharacterEncoding("utf-8");
+        response.getWriter().write(JSONObject.toJSONString(Result.error("未登录")));
     }
 
 }

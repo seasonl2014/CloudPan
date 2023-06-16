@@ -1,12 +1,15 @@
 package com.cloudpan.mapper;
 
 import com.cloudpan.entity.Account;
+import com.cloudpan.entity.UserAccount;
 import org.apache.ibatis.annotations.*;
 
 @Mapper
 public interface UserMapper {
     @Select("select * from user_info where username = #{text} or email = #{text}")
     Account findUserByUsernameOrEmail(String text);
+    @Select("select * from user_info where username = #{text} or email = #{text}")
+    UserAccount findUserAccountByUsername(String text);
     @Insert("insert into user_info (username,email,password) values (#{username},#{email},#{password})" )
     int createUser(@Param("username") String username, @Param("password") String password, @Param("email") String email);
 
